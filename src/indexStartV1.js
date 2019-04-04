@@ -1,9 +1,9 @@
 // start with these global variables
-var xIsNext = true;
-var winner = null;
-var squares = Array(9).fill(null);
-var winningLine = Array();
-var lines = [
+var xIsNext = true;//keeps track of whos turn it is
+var winner = null;//keeps track of the winner
+var squares = Array(9).fill(null);//keeps track of the state of the board
+var winningLine = Array();//keeps track of where the winning line is
+var lines = [ //all possible ways to win
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -19,17 +19,29 @@ function init()
     // Add an onclick handler to all of the squares
     // The name attribute for all of the divs is square
     // Use the function handleClick to handle the event 
+   var boardSquares = document.getElementById("square");
+   for(i=0;i < boardSquares.length; i++)
+    boardSquares.handleClick();
 }
 
 function handleClick() {
 
     // Get the id from the square and put it in a variable
     // Remember that the id is an integer 0 - 8
-
+        
+    var i = this.id;
+    
     // Set the element in the squares array to the player's symbol
     // Update the inner html for this square in the UI
     // Set the onclick handler for this square in the UI to an empty anonymous function or arrow function
     // Update the variable xIsNext
+    if(!xIsNext){
+        sqaures[i].this;
+    }
+    document.getElementById("status").innerHTML = (square[i]);
+    this.onclick = function(){};
+    xIsNext = true;
+    
 
     // If calculateWinner returns true
     // highlight the winner and disable all of the squares
@@ -38,7 +50,7 @@ function handleClick() {
 
 function calculateWinner() {
     for (var i = 0; i < lines.length; i++) {
-        var a = lines[i][0];
+        var a = lines[i][0];//checks indexes
         var b = lines[i][1];
         var c = lines[i][2];       
         if (squares[a] && 
@@ -71,3 +83,4 @@ function disableAll() {
 }
 
 // When the page has finished loading, call the function init    
+window.onload = init;
