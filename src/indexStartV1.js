@@ -36,7 +36,7 @@ function handleClick() {
     // Set the onclick handler for this square in the UI to an empty anonymous function or arrow function
     // Update the variable xIsNext
     if(!xIsNext){
-        sqaures[i].this;
+        this.sqaures[i];
     }
     document.getElementById("status").innerHTML = (square[i]);
     this.onclick = function(){};
@@ -46,6 +46,14 @@ function handleClick() {
     // If calculateWinner returns true
     // highlight the winner and disable all of the squares
     // otherwise update the status in the UI to display the player
+    if(calculateWinner){
+        highlightWinner();
+        disableAll();
+    }
+    else(!calculateWinner)
+    
+
+
 }
 
 function calculateWinner() {
