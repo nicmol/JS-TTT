@@ -16,12 +16,16 @@ var lines = [ //all possible ways to win
 
 function init()
 {
+   
     // Add an onclick handler to all of the squares
     // The name attribute for all of the divs is square
     // Use the function handleClick to handle the event 
-   var boardSquares = document.getElementById("square");
-   for(i=0;i < boardSquares.length; i++)
-    boardSquares.handleClick();
+   var boardSquares = document.getElementsByName("square");
+   for(i=0;i < boardSquares.length; i++){
+    boardSquares[i].onClick = handleClick();
+    //alert(boardSquares[i]);
+   }
+  
 }
 
 function handleClick() {
@@ -30,15 +34,16 @@ function handleClick() {
     // Remember that the id is an integer 0 - 8
         
     var i = this.id;
+    //alert(this);
     
     // Set the element in the squares array to the player's symbol
     // Update the inner html for this square in the UI
     // Set the onclick handler for this square in the UI to an empty anonymous function or arrow function
     // Update the variable xIsNext
     if(!xIsNext){
-        this.sqaures[i];
+      //Logic?
     }
-    document.getElementById("status").innerHTML = (square[i]);
+    document.getElementById("status").innerHTML = "O";
     this.onclick = function(){};
     xIsNext = true;
     
@@ -51,8 +56,6 @@ function handleClick() {
         disableAll();
     }
     else(!calculateWinner)
-    
-
 
 }
 
