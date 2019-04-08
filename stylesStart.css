@@ -3,8 +3,13 @@
   width: 200px;
   height: 200px;
   cursor: pointer;
+  text-align: center;
+  padding-top: 50px;
 }  
 
 .red {
   color:red;
 }
+
+
+

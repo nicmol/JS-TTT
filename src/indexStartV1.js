@@ -45,13 +45,13 @@ function handleClick() {
     
     if(!xIsNext){
         squares[i] = "O";
-        document.getElementById("status").innerHTML = "Next Player: X";
-        document.getElementById(i).innerHTML = "O";
+        document.getElementById("status").innerHTML = "<h1>Next Player: X</h1>";
+        document.getElementById(i).innerHTML = "<h1>O</h1>";
        }
     if(xIsNext){
         squares[i] = "X";
-        document.getElementById("status").innerHTML = "Next Player: O";
-        document.getElementById(i).innerHTML = "X";
+        document.getElementById("status").innerHTML = "<h1>Next Player: O</h1>";
+        document.getElementById(i).innerHTML = "<h1>X</h1>";
       }
 this.removeEventListener("click", handleClick);
 xIsNext = !xIsNext; 
@@ -91,7 +91,8 @@ function highlightWinner() {
     //      get the next square using the current index in the winningLine array as the id
     //      add the class red to the square
     // Disable all of the squares
-    document.getElementById("status").innerHTML = "You win";
+    document.getElementById("status").innerHTML = "<h1>You win: " + winner + "</h1>";
+    document.getElementById("status").className = "alert alert-success";
     for(i=0; i < winningLine.length; i++){
         document.getElementById(winningLine[i]).className += " red";
     }
