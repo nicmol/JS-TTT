@@ -26,7 +26,11 @@ class TTT
         [0, 4, 8],
         [2, 4, 6],
         ];
-    
+    this.calculateWinner = this.calculateWinner.bind(this);
+    this.highlightWinner = this.highlightWinner.bind(this);
+    this.disableAll = this.disableAll.bind(this);
+    this.init = this.init.bind(this);
+
     this.init();
     
    }
@@ -65,7 +69,8 @@ init(){
 }
 calculateWinner() {
     for (let i = 0; i < this.lines.length; i++) {
-        let[a, b, c] = [this.lines[i][0], this.lines[i][1],this.lines[2]];
+        let[a, b, c] = [this.lines[i][0], this.lines[i][1], this.lines[i][2]];
+        
         if (this.squares[a] && 
         this.squares[a] === this.squares[b] && 
         this.squares[a] === this.squares[c]) {
@@ -80,7 +85,7 @@ calculateWinner() {
 }
 
  handleClick(i) {
-    
+    //console.log(this)
     let clickedSquare = this.squares[i];
     
     if(!this.xIsNext){
@@ -96,7 +101,7 @@ calculateWinner() {
       }
     removeEventListener("click", this.handleClick);
     this.xIsNext = !this.xIsNext; 
-   console.log(this.calculateWinner())
+   
         if(this.calculateWinner()){
             this.highlightWinner();
             this.disableAll();
