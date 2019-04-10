@@ -27,6 +27,7 @@ class TTT
         [2, 4, 6],
         ];
     
+    this.init();
     
    }
 
@@ -55,33 +56,74 @@ class TTT
         -   add a local variable to refer to the clicked square
             -   remember that squares have an integer id 0 - 8
     */
-  init()
-{
+init(){
    
-  let boardSquares = document.getElementsByName("square");
-   for(i=0;i < this.boardSquares.length; i++){
-           this.boardSquares[i].addEventListener("click", this.handleClick.bind(this, i));
-       
+    let boardSquares = document.getElementsByName("square");
+    for(let i=0; i < boardSquares.length; i++){
+        boardSquares[i].addEventListener("click", this.handleClick.bind(this, i));
    }
 }
 calculateWinner() {
-    for (var i = 0; i < lines.length; i++) {
-        var a = lines[i][0];//checks indexes
-        var b = lines[i][1];
-        var c = lines[i][2];       
-        if (squares[a] && 
-        squares[a] === squares[b] && 
-        squares[a] === squares[c]) {
-            winner = squares[a];
-            winningLine = lines[i];
+    for (let i = 0; i < this.lines.length; i++) {
+        let[a, b, c] = [this.lines[i][0], this.lines[i][1],this.lines[2]];
+        if (this.squares[a] && 
+        this.squares[a] === this.squares[b] && 
+        this.squares[a] === this.squares[c]) {
+            this.winner = this.squares[a];
+            this.winningLine = this.lines[i];
             return true;
         }
     }
-    winner = null;
-    winningLine = Array();
+    this.winner = null;
+    this.winningLine = Array();
     return false;
 }
 
+ handleClick(i) {
+    
+    let clickedSquare = this.squares[i];
+    
+    if(!this.xIsNext){
+        this.squares[i] = "O";
+        document.getElementById("status").innerHTML = "<h1>Next Player: X</h1>";
+        document.getElementById(i).innerHTML = "<h1>O</h1>";
+       }
+    if(this.xIsNext){
+        this.squares[i] = "X";
+   
+        document.getElementById("status").innerHTML = "<h1>Next Player: O</h1>";
+        document.getElementById(i).innerHTML = "<h1>X</h1>";
+      }
+    removeEventListener("click", this.handleClick);
+    this.xIsNext = !this.xIsNext; 
+   console.log(this.calculateWinner())
+        if(this.calculateWinner()){
+            this.highlightWinner();
+            this.disableAll();
+        }
+    }
+
+highlightWinner() {
+
+    
+        document.getElementById("status").innerHTML = "<h1>You win: " + this.winner + "</h1>";
+        document.getElementById("status").className = "alert alert-success";
+        for(let i=0; i < this.winningLine.length; i++){
+            document.getElementById(this.winningLine[i]).className += " red";
+        }
+        this.disableAll();
+    }
+    
+ disableAll() {
+    
+        // Set the onclick handler for all squares to function that does nothing
+        // The id of the square is a number 0 - 8
+        let playedSquares = document.getElementsByName("square");
+        for(let i=0; i < playedSquares.length; i++){
+        playedSquares[i].removeEventListener("click", this.handleClick);
+        }
+    }
+}
 // declare a variable ttt
 let ttt;
 
